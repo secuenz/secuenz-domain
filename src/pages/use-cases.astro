@@ -1,0 +1,53 @@
+---
+import FinalCTA from '../components/FinalCTA.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+import { useCases } from '../data/useCases';
+import { workflowBlueprints } from '../data/workflows';
+---
+
+<Layout
+  title="Security Assessment Use Cases | Secuenz ChaosEngine"
+  description="How pentest consultancies, AppSec teams and internal red teams use ChaosEngine to standardize and govern security assessment workflows."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'Use Cases' }]} />
+        <span class="section-kicker">Built around security assessment work</span>
+        <h1>One workflow model. Three operating contexts.</h1>
+        <p>ChaosEngine helps teams move repeatable assessment work out of personal scripts and into visible, approval-gated execution.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="grid-3">
+            {useCases.map((item) => (
+                <a class="feature-card linked-card" href={`/use-cases/${item.slug}/`}>
+                    <span class="badge">{item.eyebrow}</span>
+                    <h2>{item.title}</h2>
+                    <p>{item.summary}</p>
+                    <span class="card-link">Explore use case →</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <section class="split-section">
+        <div>
+            <span class="section-kicker">Reference blueprints</span>
+            <h2>Start with a workflow your team already recognizes.</h2>
+            <p>Each blueprint shows the scope, node sequence, workflow approval policy and expected artifacts before an early-access pilot begins.</p>
+        </div>
+        <div class="stack-list">
+            {workflowBlueprints.map((workflow) => (
+                <a href={`/workflows/${workflow.slug}/`} class="stack-row">
+                    <div>
+                        <strong>{workflow.title}</strong>
+                        <span>{workflow.audience}</span>
+                    </div>
+                    <span aria-hidden="true">→</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <FinalCTA />
+</Layout>

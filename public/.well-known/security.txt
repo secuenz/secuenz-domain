@@ -1,0 +1,5 @@
+Contact: mailto:core@secuenz.com
+Expires: 2027-08-19T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://secuenz.com/.well-known/security.txt
+Policy: https://secuenz.com/security/

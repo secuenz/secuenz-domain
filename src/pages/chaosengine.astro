@@ -1,0 +1,84 @@
+---
+import FinalCTA from '../components/FinalCTA.astro';
+import ProductPreview from '../components/ProductPreview.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+import { productFeatures } from '../data/productFeatures';
+import { CTA } from '../data/site';
+---
+
+<Layout
+  title="ChaosEngine | Security Assessment Orchestration Platform"
+  description="ChaosEngine helps AppSec, red-team and pentest teams build, approve and run repeatable security assessment workflows."
+>
+    <section class="page-hero product-hero">
+        <Breadcrumb trail={[{ label: 'ChaosEngine' }]} />
+        <span class="section-kicker">Security assessment orchestration</span>
+        <h1>Make the assessment process as reviewable as the result.</h1>
+        <p>ChaosEngine replaces fragile hand-built pipelines with visible workflows that connect authorized scope, human decisions, worker execution and output artifacts.</p>
+        <div class="hero-btns left-actions">
+            <a href={CTA.earlyAccess} class="btn btn-primary">Request Early Access</a>
+            <a href="/workflows/" class="btn btn-outline">Inspect workflows</a>
+        </div>
+    </section>
+
+    <ProductPreview />
+
+    <section class="problem-grid">
+        <div>
+            <span class="section-kicker">The operating problem</span>
+            <h2>Security teams have tools. The missing layer is repeatable execution.</h2>
+        </div>
+        <div class="prose compact-prose">
+            <p>Bash scripts and one-off commands are fast to create, but difficult to review, hand off and reproduce. Tool output becomes fragmented, approval context lives in chat, and the next assessment starts by reconstructing the previous one.</p>
+            <p>ChaosEngine makes the sequence explicit: what enters the workflow, what can run, who must approve it, where it executes and which artifacts it produces.</p>
+        </div>
+    </section>
+
+    <section class="features product-features" id="capabilities">
+        <div class="section-heading">
+            <span class="section-kicker">Implemented product capabilities</span>
+            <h2>Design, govern, execute and inspect from one control plane.</h2>
+        </div>
+        <div class="grid-3 feature-grid">
+            {productFeatures.map((capability, index) => (
+                <div class="feature-card capability-card">
+                    <div class="feature-card-meta"><span>0{index + 1}</span><span>{capability.eyebrow}</span></div>
+                    <h3>{capability.title}</h3>
+                    <p>{capability.body}</p>
+                    <div class="capability-detail">{capability.detail}</div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="split-section">
+        <div>
+            <span class="section-kicker">Execution model</span>
+            <h2>The workflow definition is only the start.</h2>
+            <p>Before execution, ChaosEngine validates the graph and checks the applicable approval state. During execution, nodes run through the configured backend and retain their status and artifacts.</p>
+        </div>
+        <ol class="number-list">
+            <li><span>01</span><div><strong>Define authorized scope</strong><p>Start with a supported target type and the context needed by later nodes.</p></div></li>
+            <li><span>02</span><div><strong>Compose and validate</strong><p>Connect nodes into a reachable, acyclic workflow with a clear output path.</p></div></li>
+            <li><span>03</span><div><strong>Approve</strong><p>Record the reviewer decision required by the organization and workflow state.</p></div></li>
+            <li><span>04</span><div><strong>Execute through workers</strong><p>Run node commands and agent operations in the configured execution environment.</p></div></li>
+            <li><span>05</span><div><strong>Review artifacts</strong><p>Inspect node outputs and final exports together with the execution status.</p></div></li>
+        </ol>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-heading">
+            <span class="section-kicker">Product boundaries</span>
+            <h2>What ChaosEngine is—and is not.</h2>
+        </div>
+        <div class="faq-grid">
+            <details open><summary>Is ChaosEngine a vulnerability scanner?</summary><p>No. ChaosEngine orchestrates registered tools, scripts and agents. The scanner remains the tool node; ChaosEngine governs how it participates in the wider assessment.</p></details>
+            <details><summary>Is it a managed pentest service?</summary><p>No. Your team remains responsible for authorization, assessment design, reviewer decisions and interpretation of results.</p></details>
+            <details><summary>Is every CLI tool automatically supported?</summary><p>No. A tool must be represented in the ChaosEngine catalog or deliberately wrapped, and its binary and dependencies must exist on the selected worker.</p></details>
+            <details><summary>Does catalog availability prove runtime readiness?</summary><p>No. Early-access onboarding confirms the actual worker environment and tool behavior before a workflow is treated as executable.</p></details>
+        </div>
+    </section>
+
+    <FinalCTA secondaryHref="/docs/" secondaryLabel="Read product docs" />
+</Layout>

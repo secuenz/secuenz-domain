@@ -1,0 +1,64 @@
+---
+import Layout from './Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author?: string;
+  tags?: string[];
+  /** Listing page this post belongs to, e.g. { href: '/blog/', label: 'Blog' } */
+  parent: { href: string; label: string };
+}
+
+const { title, description, pubDate, author = 'Secuenz', tags = [], parent } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  author: { '@type': 'Organization', name: author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Secuenz',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(Astro.url.pathname, Astro.site).href },
+  ...(tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+};
+---
+
+<Layout title={`${title} | Secuenz`} description={description} structuredData={[articleSchema]} socialImage={false}>
+    <article>
+        <section class="page-hero">
+            <Breadcrumb trail={[{ label: parent.label, href: parent.href }, { label: title }]} />
+            <h1>{title}</h1>
+            <p>{description}</p>
+        </section>
+
+        <section class="content-section">
+            <div class="prose">
+                <span class="updated">
+                    <time datetime={pubDate.toISOString()}>{formattedDate}</time>{author && ` — ${author}`}
+                </span>
+                <slot />
+                {tags.length > 0 && (
+                    <p style="margin-top: 48px;">
+                        {tags.map((tag) => <span class="badge">{tag}</span>)}
+                    </p>
+                )}
+                <p style="margin-top: 48px;"><a href={parent.href}>← Back to {parent.label}</a></p>
+            </div>
+        </section>
+    </article>
+</Layout>

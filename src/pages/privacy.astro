@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="Privacy Policy | Secuenz"
+  description="How Secuenz collects, uses, and protects information on secuenz.com and within ChaosEngine."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Privacy" }]} />
+        <h1>Privacy Policy</h1>
+        <p>What we collect on this site and within ChaosEngine, and how it's used.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="prose">
+            <span class="updated">Last updated: August 20, 2026</span>
+
+            <h2>This website (secuenz.com)</h2>
+            <p>secuenz.com is a static marketing site. It does not use tracking cookies or third-party analytics at this time. If that changes, this policy will be updated first.</p>
+            <p>The early-access application is processed in your browser and opens your email client with the answers prefilled. The website does not store those answers. We receive the information only if you choose to send the resulting email.</p>
+            <p>If you email us, we receive whatever information you choose to include — typically your name, email address, company, role and workflow context. We use it only to respond to your inquiry, evaluate pilot fit and follow up about ChaosEngine.</p>
+
+            <h2>The ChaosEngine product</h2>
+            <p>ChaosEngine is a security assessment orchestration platform still approaching general availability. As account creation, workflow execution, and data storage features become live, this policy will be expanded to cover:</p>
+            <ul>
+                <li>What account and organization data we collect</li>
+                <li>How workflow inputs (targets, credentials, scan results) are stored and who can access them</li>
+                <li>Data retention and deletion</li>
+                <li>Sub-processors and infrastructure providers</li>
+            </ul>
+            <div class="callout">We are intentionally not publishing detailed data-processing claims about the product until they're accurate and enforced. This page will be updated ahead of general availability rather than backfilled after the fact.</div>
+
+            <h2>Your rights</h2>
+            <p>You can request access to, correction of, or deletion of any personal data we hold about you by emailing <a href={CTA.hello}>{EMAIL.hello}</a>.</p>
+
+            <h2>Contact</h2>
+            <p>Questions about this policy: <a href={CTA.hello}>{EMAIL.hello}</a>.</p>
+        </div>
+    </section>
+</Layout>

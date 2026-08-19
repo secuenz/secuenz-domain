@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import PostList from '../../components/PostList.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout
+  title="Blog | Secuenz ChaosEngine"
+  description="Technical writing on security assessment orchestration, workflow automation, and running offensive-security tooling at scale."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Blog" }]} />
+        <h1>Blog</h1>
+        <p>Technical writing on assessment orchestration, workflow automation, and running security tooling repeatably.</p>
+    </section>
+
+    <section class="content-section">
+        <PostList posts={posts} base="/blog/" emptyMessage="No posts published yet. Check back soon." />
+    </section>
+</Layout>

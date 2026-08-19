@@ -1,0 +1,99 @@
+---
+import FinalCTA from '../components/FinalCTA.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="ChaosEngine Product Documentation | Secuenz"
+  description="A practical overview of ChaosEngine workflows, nodes, approvals, workers, organization boundaries and execution artifacts."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'Docs' }]} />
+        <span class="section-kicker">Early-access product guide</span>
+        <h1>Understand the workflow model before onboarding.</h1>
+        <p>This guide documents the stable public concepts behind ChaosEngine. Detailed API and operator references will expand as early-access behavior settles.</p>
+    </section>
+
+    <section class="docs-layout">
+        <nav class="docs-nav" aria-label="Documentation sections">
+            <strong>On this page</strong>
+            <a href="#overview">Overview</a>
+            <a href="#lifecycle">Workflow lifecycle</a>
+            <a href="#nodes">Node types</a>
+            <a href="#capabilities">Execution controls</a>
+            <a href="#workers">Workers and tools</a>
+            <a href="#access">Organizations and access</a>
+            <a href="#results">Results and evidence</a>
+            <a href="#pilot">Prepare a pilot</a>
+        </nav>
+        <article class="prose docs-prose">
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>ChaosEngine is a security assessment orchestration platform. A workflow describes how an authorized target moves through input, tool, script, agent and output stages. The workflow graph makes dependencies and conditional branches explicit, while workflow approval remains a separate governance decision.</p>
+                <div class="callout">ChaosEngine does not grant authorization to test a target. Users remain responsible for ensuring every target and action is permitted by the applicable owner and engagement scope.</div>
+            </section>
+
+            <section id="lifecycle">
+                <h2>Workflow lifecycle</h2>
+                <ol>
+                    <li><strong>Draft:</strong> compose the workflow and its inputs without treating it as executable.</li>
+                    <li><strong>Validate:</strong> check the graph structure and referenced resources.</li>
+                    <li><strong>Approve:</strong> record the reviewer decision required before execution.</li>
+                    <li><strong>Execute:</strong> submit nodes through the configured execution backend.</li>
+                    <li><strong>Review:</strong> inspect statuses, node artifacts and final outputs.</li>
+                </ol>
+                <p>Approval and graph validity do not prove that every external binary is installed. Worker readiness is a separate runtime concern.</p>
+            </section>
+
+            <section id="nodes">
+                <h2>Node types</h2>
+                <div class="docs-table" role="table" aria-label="ChaosEngine node types">
+                    <div role="row"><strong role="cell">Input</strong><span role="cell">Introduces the authorized target or starting data.</span></div>
+                    <div role="row"><strong role="cell">Tool</strong><span role="cell">Runs a registered security tool or action.</span></div>
+                    <div role="row"><strong role="cell">Script</strong><span role="cell">Performs deliberately configured custom logic.</span></div>
+                    <div role="row"><strong role="cell">Agent</strong><span role="cell">Uses an approved agent for analysis inside the workflow.</span></div>
+                    <div role="row"><strong role="cell">Output</strong><span role="cell">Defines the terminal result or export contract.</span></div>
+                </div>
+            </section>
+
+            <section id="capabilities">
+                <h2>Execution controls</h2>
+                <p>Current product surfaces support conditional edges over structured JSON output, node timeouts and retry policy, scheduled runs, cancellation and resuming from a failed node. The workflow copilot can propose canvas changes and provides an undo path for its latest modification.</p>
+                <p>Execution activity exposes queue and run status, node-level results, errors, structured table output and available artifacts. These controls do not replace analyst review or prove that an external worker dependency is installed.</p>
+            </section>
+
+            <section id="workers">
+                <h2>Workers and tool availability</h2>
+                <p>Nodes execute through the configured backend. Local execution uses worker infrastructure, while other environments may submit work through the configured batch backend. The selected environment must provide every required tool and dependency.</p>
+                <p>Before treating a workflow as runnable, confirm:</p>
+                <ul>
+                    <li>The exact registered tool or action referenced by each node</li>
+                    <li>The worker binary and meaningful version output</li>
+                    <li>Input validation, timeout and retry expectations</li>
+                    <li>Output paths and artifact handling</li>
+                    <li>Cancellation and cleanup behavior</li>
+                </ul>
+            </section>
+
+            <section id="access">
+                <h2>Organizations and access</h2>
+                <p>ChaosEngine separates authentication from authorization. Organization-owned resources are scoped to the authenticated organization, while permissions control which operations a user can perform. Approval is a distinct privilege rather than an implication of general access.</p>
+            </section>
+
+            <section id="results">
+                <h2>Results and evidence</h2>
+                <p>Node outputs remain associated with their execution context. A workflow can expose structured output for review or export, while tool-native artifacts may remain available where the configured storage and retention policy permits.</p>
+                <p>Do not treat normalized output as a substitute for analyst validation. The final interpretation, severity and customer-facing statement remain human responsibilities.</p>
+            </section>
+
+            <section id="pilot">
+                <h2>Prepare an early-access pilot</h2>
+                <p>Bring one workflow that your team already runs. Document its authorized input, current commands or tools, the point where a reviewer should intervene, required worker dependencies and the artifact expected at the end.</p>
+                <p>Start with one measurable workflow rather than attempting to migrate an entire assessment program at once.</p>
+            </section>
+        </article>
+    </section>
+
+    <FinalCTA secondaryHref="/workflows/" secondaryLabel="Browse blueprints" />
+</Layout>

@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import PostList from '../../components/PostList.astro';
+
+const posts = (await getCollection('announcements', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout
+  title="Announcements | Secuenz"
+  description="Company and product announcements from Secuenz."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Announcements" }]} />
+        <h1>Announcements</h1>
+        <p>Company and product news from Secuenz.</p>
+    </section>
+
+    <section class="content-section">
+        <PostList posts={posts} base="/announcements/" emptyMessage="No announcements yet. Check back soon." />
+    </section>
+</Layout>

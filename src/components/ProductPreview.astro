@@ -1,0 +1,67 @@
+<section class="product-preview" aria-labelledby="product-preview-title">
+    <div class="preview-bar">
+        <div>
+            <span class="preview-kicker">Representative interface preview</span>
+            <strong id="product-preview-title">External reconnaissance workflow</strong>
+        </div>
+        <span class="status-badge status-draft">Pending approval</span>
+    </div>
+
+    <div class="preview-body">
+        <div class="workflow-canvas" aria-label="Workflow with input, tool, agent and output nodes">
+            <div class="workflow-row">
+                <div class="workflow-node node-input">
+                    <span>01 / Input</span>
+                    <strong>Target domain</strong>
+                    <small>example.com</small>
+                </div>
+                <span class="workflow-edge" aria-hidden="true">→</span>
+                <div class="workflow-node node-tool">
+                    <span>02 / Tool</span>
+                    <strong>Asset discovery</strong>
+                    <small>Passive discovery</small>
+                </div>
+                <span class="workflow-edge" aria-hidden="true">→</span>
+                <div class="workflow-node node-tool">
+                    <span>03 / Tool</span>
+                    <strong>Service validation</strong>
+                    <small>Live host probing</small>
+                </div>
+            </div>
+            <div class="workflow-row workflow-row-offset">
+                <div class="workflow-node node-agent">
+                    <span>04 / Agent</span>
+                    <strong>Result triage</strong>
+                    <small>Approved agent definition</small>
+                </div>
+                <span class="workflow-edge" aria-hidden="true">→</span>
+                <div class="workflow-node node-tool">
+                    <span>05 / Conditional edge</span>
+                    <strong>Findings present?</strong>
+                    <small>Continue when true</small>
+                </div>
+                <span class="workflow-edge" aria-hidden="true">→</span>
+                <div class="workflow-node node-output">
+                    <span>06 / Output</span>
+                    <strong>Assessment results</strong>
+                    <small>Structured export</small>
+                </div>
+            </div>
+        </div>
+
+        <aside class="run-panel" aria-label="Example execution status">
+            <div class="run-panel-heading">
+                <span>Run status</span>
+                <strong>Waiting for approval</strong>
+            </div>
+            <ol class="run-list">
+                <li class="complete"><span>Asset discovery</span><strong>214 results</strong></li>
+                <li class="complete"><span>Service validation</span><strong>187 live</strong></li>
+                <li class="pending"><span>Workflow approval</span><strong>Pending</strong></li>
+                <li><span>Result triage</span><strong>Blocked</strong></li>
+                <li><span>Export</span><strong>Blocked</strong></li>
+            </ol>
+        </aside>
+    </div>
+    <p class="preview-note">This preview represents the current product model. Labels and controls may change during early access; example targets and outputs are illustrative.</p>
+</section>

@@ -1,0 +1,38 @@
+---
+interface Crumb {
+  label: string;
+  /** Omit on the final crumb — the current page isn't a link. */
+  href?: string;
+}
+
+interface Props {
+  trail: Crumb[];
+}
+
+const { trail } = Astro.props;
+
+// "Home" is implicit on every trail, so callers only pass what follows it.
+const full: Crumb[] = [{ label: 'Home', href: '/' }, ...trail];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: full.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.label,
+    ...(crumb.href ? { item: new URL(crumb.href, Astro.site).href } : {}),
+  })),
+};
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    {full.map((crumb, i) => (
+        <>
+            {i > 0 && ' / '}
+            {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
+        </>
+    ))}
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

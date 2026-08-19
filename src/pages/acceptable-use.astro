@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="Acceptable Use Policy | Secuenz"
+  description="Rules for authorized use of ChaosEngine's offensive-security tooling and workflow orchestration."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Acceptable Use" }]} />
+        <h1>Acceptable Use Policy</h1>
+        <p>ChaosEngine orchestrates reconnaissance, scanning, and exploitation-adjacent tooling. That capability comes with a hard boundary: authorization.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="prose">
+            <span class="updated">Last updated: August 19, 2026</span>
+
+            <h2>The rule</h2>
+            <p>You may only run ChaosEngine workflows against targets — domains, IPs, repositories, applications, or models — that you own or have explicit, documented authorization to test. This applies to every node in a workflow: recon, scanning, exploitation, and AI-agent analysis alike.</p>
+
+            <div class="callout">No exceptions for "just recon" or "read-only" nodes. Unauthorized reconnaissance against third-party infrastructure is prohibited under this policy regardless of intent.</div>
+
+            <h2>Prohibited uses</h2>
+            <ul>
+                <li>Running workflows against systems you don't own or lack written authorization to test</li>
+                <li>Using ChaosEngine to launch denial-of-service, mass-scanning, or indiscriminate internet-wide sweeps</li>
+                <li>Using the platform to develop or distribute malware unrelated to authorized security testing</li>
+                <li>Circumventing approval controls that an organization has configured for governance purposes</li>
+                <li>Reselling or sublicensing access without our written consent</li>
+            </ul>
+
+            <h2>Approval controls exist for a reason</h2>
+            <p>ChaosEngine's approval-gated execution model exists so a second person signs off before a workflow runs against a target. Configuring gates to be meaningless (e.g. auto-approving everything by default) undermines the governance the platform is built to provide — we strongly recommend against it for any workflow touching production or third-party systems.</p>
+
+            <h2>Enforcement</h2>
+            <p>We may suspend or terminate access for violations of this policy. If you become aware of a violation, report it to <a href={CTA.security}>{EMAIL.security}</a>.</p>
+
+            <h2>Related policies</h2>
+            <ul>
+                <li><a href="/security/">Security &amp; Vulnerability Disclosure</a></li>
+                <li><a href="/terms/">Terms of Service</a></li>
+            </ul>
+        </div>
+    </section>
+</Layout>

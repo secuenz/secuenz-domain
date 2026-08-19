@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="Terms of Service | Secuenz"
+  description="Terms governing use of secuenz.com and early access to the ChaosEngine platform."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Terms" }]} />
+        <h1>Terms of Service</h1>
+        <p>Terms governing use of secuenz.com and early access to ChaosEngine.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="prose">
+            <span class="updated">Last updated: August 19, 2026</span>
+
+            <h2>Current status</h2>
+            <p>ChaosEngine is in active development and is being offered to select users through an early-access program rather than general self-service signup. These terms apply to your use of secuenz.com and, where applicable, any early-access use of ChaosEngine. A dedicated Master Subscription Agreement will govern general availability and will be provided separately before that launch.</p>
+
+            <h2>Use of this website</h2>
+            <p>You may browse and reference the content on secuenz.com for informational purposes. You may not scrape, resell, or misrepresent the content as your own.</p>
+
+            <h2>Early access</h2>
+            <p>If you're granted early access to ChaosEngine, you agree to:</p>
+            <ul>
+                <li>Use it only against systems and targets you are authorized to test, per our <a href="/acceptable-use/">Acceptable Use Policy</a></li>
+                <li>Treat any credentials, API keys, or workspace access as confidential</li>
+                <li>Report bugs and security issues to <a href={CTA.security}>{EMAIL.security}</a> rather than exploiting them</li>
+            </ul>
+            <p>Early access is provided "as is," without warranty, and may change or be withdrawn as the product evolves.</p>
+
+            <h2>Intellectual property</h2>
+            <p>Secuenz and ChaosEngine names, logos, and product content are the property of Secuenz Inc. Workflow definitions, scripts, and findings you create using ChaosEngine remain yours.</p>
+
+            <h2>Limitation of liability</h2>
+            <p>To the extent permitted by law, Secuenz is not liable for indirect, incidental, or consequential damages arising from use of this site or early-access use of ChaosEngine.</p>
+
+            <h2>Changes to these terms</h2>
+            <p>We'll update the "last updated" date above when these terms change materially.</p>
+
+            <h2>Contact</h2>
+            <p>Questions about these terms: <a href={CTA.hello}>{EMAIL.hello}</a>.</p>
+        </div>
+    </section>
+</Layout>

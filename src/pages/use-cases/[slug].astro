@@ -1,0 +1,59 @@
+---
+import FinalCTA from '../../components/FinalCTA.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import { useCases } from '../../data/useCases';
+import { workflowBlueprints } from '../../data/workflows';
+
+export function getStaticPaths() {
+  return useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } }));
+}
+
+const { useCase } = Astro.props;
+const workflows = workflowBlueprints.filter((workflow) => useCase.workflowSlugs.includes(workflow.slug));
+---
+
+<Layout title={`${useCase.eyebrow} | Secuenz ChaosEngine`} description={useCase.summary} socialImage={false}>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'Use Cases', href: '/use-cases/' }, { label: useCase.eyebrow }]} />
+        <span class="section-kicker">{useCase.eyebrow}</span>
+        <h1>{useCase.title}</h1>
+        <p>{useCase.summary}</p>
+    </section>
+
+    <section class="comparison-section">
+        <div>
+            <span class="section-kicker">What changes</span>
+            <h2>From fragmented execution</h2>
+            <ul class="check-list muted-list">
+                {useCase.problems.map((problem) => <li>{problem}</li>)}
+            </ul>
+        </div>
+        <div class="comparison-positive">
+            <span class="section-kicker">With ChaosEngine</span>
+            <h2>To governed workflows</h2>
+            <ul class="check-list">
+                {useCase.outcomes.map((outcome) => <li>{outcome}</li>)}
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-heading">
+            <span class="section-kicker">Relevant blueprints</span>
+            <h2>Workflows to bring into a pilot</h2>
+        </div>
+        <div class="grid-2">
+            {workflows.map((workflow) => (
+                <a class="feature-card linked-card" href={`/workflows/${workflow.slug}/`}>
+                    <span class="badge">{workflow.scope}</span>
+                    <h3>{workflow.title}</h3>
+                    <p>{workflow.summary}</p>
+                    <span class="card-link">View workflow →</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <FinalCTA title={`Pilot ChaosEngine with a ${useCase.eyebrow.toLowerCase()} workflow.`} />
+</Layout>

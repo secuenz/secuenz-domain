@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="404 Not Found | Secuenz ChaosEngine"
+  description="The page you're looking for doesn't exist or has moved."
+  noindex={true}
+>
+    <section class="hero">
+        <p class="mono uppercase text-primary" style="letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 20px;">Error 404</p>
+        <h1 class="uppercase">Node Not Found<br><span>In This Workflow.</span></h1>
+        <p>The page you're looking for doesn't exist or has moved. Check the URL, or head back to a known node.</p>
+        <div class="hero-btns">
+            <a href="/" class="btn btn-primary">Back to Home</a>
+            <a href="/chaosengine/" class="btn btn-outline">View ChaosEngine</a>
+        </div>
+    </section>
+</Layout>

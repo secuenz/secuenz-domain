@@ -1,0 +1,41 @@
+---
+import FinalCTA from '../../components/FinalCTA.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import { workflowBlueprints } from '../../data/workflows';
+---
+
+<Layout
+  title="Security Workflow Library | Secuenz ChaosEngine"
+  description="Reference blueprints for repeatable, approval-gated security assessment workflows in ChaosEngine."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'Workflows' }]} />
+        <span class="section-kicker">Workflow library</span>
+        <h1>See the work before you request a demo.</h1>
+        <p>These reference blueprints show how a real assessment can be scoped, composed, approved and exported in ChaosEngine.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="grid-3">
+            {workflowBlueprints.map((workflow, index) => (
+                <a class="feature-card linked-card workflow-card" href={`/workflows/${workflow.slug}/`}>
+                    <span class="workflow-number">0{index + 1}</span>
+                    <span class="badge">{workflow.audience}</span>
+                    <h2>{workflow.title}</h2>
+                    <p>{workflow.summary}</p>
+                    <dl class="card-meta">
+                        <div><dt>Scope</dt><dd>{workflow.scope}</dd></div>
+                        <div><dt>Steps</dt><dd>{workflow.steps.length} nodes</dd></div>
+                    </dl>
+                    <span class="card-link">Inspect blueprint →</span>
+                </a>
+            ))}
+        </div>
+        <div class="callout wide-callout">
+            These are reference designs, not unattended scanning recipes. Every active assessment must stay inside a target scope you are authorized to test, and runtime availability depends on the tools installed on the selected worker.
+        </div>
+    </section>
+
+    <FinalCTA secondaryHref="/use-cases/" secondaryLabel="Explore use cases" />
+</Layout>

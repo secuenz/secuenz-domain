@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const extensionPoints = [
+  { eyebrow: 'Catalog action', title: 'Registered tool actions', body: 'Reference an approved action with its command contract, runtime requirements and organization access.' },
+  { eyebrow: 'Custom logic', title: 'Script nodes', body: 'Add deliberately configured transformation, filtering or orchestration logic inside the workflow graph.' },
+  { eyebrow: 'Assisted analysis', title: 'Agent nodes', body: 'Use an approved agent definition for analysis while retaining its place in the workflow and execution record.' },
+  { eyebrow: 'Runtime context', title: 'Configurations', body: 'Keep reusable runtime configuration governed separately from the workflow that consumes it.' },
+  { eyebrow: 'Result contract', title: 'Structured outputs', body: 'Describe JSON, JSONL or text outputs and table columns for consistent downstream review.' },
+  { eyebrow: 'Automation surface', title: 'MCP access', body: 'Operate supported scopes, workflows, resources, approvals and executions through the authenticated MCP surface.' },
+];
+---
+
+<Layout
+  title="Integrations | Secuenz ChaosEngine"
+  description="ChaosEngine connects approved catalog actions, custom scripts, agents, configurations and structured outputs through one workflow model."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Integrations" }]} />
+        <span class="section-kicker">Extensibility model</span>
+        <h1>Bring your security process without advertising someone else’s product.</h1>
+        <p>ChaosEngine models approved actions, scripts, agents, configurations and outputs as governed building blocks. Runtime readiness is verified against the selected worker environment.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="callout" style="max-width: 780px; margin-bottom: 48px;">
+            A catalog entry is not proof that a binary is installed or executable on a particular worker. Early-access onboarding confirms the registered tool, worker dependencies and runtime behavior before a workflow is executed.
+        </div>
+        <div class="grid-3 feature-grid">
+            {extensionPoints.map((item, index) => (
+                <article class="feature-card capability-card">
+                    <div class="feature-card-meta"><span>0{index + 1}</span><span>{item.eyebrow}</span></div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                </article>
+            ))}
+        </div>
+    </section>
+</Layout>

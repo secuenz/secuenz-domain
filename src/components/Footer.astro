@@ -1,0 +1,65 @@
+---
+const columns = [
+  {
+    heading: 'Product',
+    links: [
+      { href: '/chaosengine/', label: 'ChaosEngine' },
+      { href: '/workflows/', label: 'Workflow Library' },
+      { href: '/integrations/', label: 'Extensibility' },
+      { href: '/use-cases/', label: 'Use Cases' },
+      { href: '/early-access/', label: 'Early Access' },
+    ],
+  },
+  {
+    heading: 'Company',
+    links: [
+      { href: '/about/', label: 'About' },
+      { href: '/blog/', label: 'Blog' },
+      { href: '/announcements/', label: 'Announcements' },
+      { href: '/changelog/', label: 'Changelog' },
+      { href: '/contact/', label: 'Contact' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { href: '/docs/', label: 'Documentation' },
+      { href: '/security/', label: 'Security' },
+      { href: '/privacy/', label: 'Privacy' },
+      { href: '/terms/', label: 'Terms' },
+      { href: '/acceptable-use/', label: 'Acceptable Use' },
+    ],
+  },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <a href="/" class="logo-container" style="margin-bottom: 20px;">
+                <svg aria-hidden="true" focusable="false" width="24" height="20" viewBox="0 0 34 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.0008 15.4488V20.4561L21.0524 16.4054H34V25.5671H17V25.5947L11.9215 20.517H0V11.3553H12.9073L17.0008 15.4488Z" fill="#888"/>
+                    <path d="M17.0008 0.310547L22.0706 5.38114H34V14.5428H21.0524L16.9992 10.4905V5.38114L17 5.37956L12.9073 9.47224H0V0.310547H17.0008Z" fill="#888"/>
+                </svg>
+                <span style="color:#888;">SECUENZ</span>
+            </a>
+            <p class="footer-summary">
+                ChaosEngine by Secuenz.<br>
+                Security assessment orchestration.
+            </p>
+        </div>
+        {columns.map((col) => (
+            <div class="footer-col">
+                <h4>{col.heading}</h4>
+                <ul>
+                    {col.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+                </ul>
+            </div>
+        ))}
+    </div>
+    <div class="footer-copyright">
+        &copy; {year} Secuenz Inc. All rights reserved.
+    </div>
+</footer>

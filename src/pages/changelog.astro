@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+
+const entries = (await getCollection('changelog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const rendered = await Promise.all(
+  entries.map(async (entry) => ({
+    ...entry,
+    Content: (await render(entry)).Content,
+  }))
+);
+---
+
+<Layout
+  title="Changelog | Secuenz ChaosEngine"
+  description="What's new with Secuenz and ChaosEngine."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Changelog" }]} />
+        <h1>Changelog</h1>
+        <p>What's new with Secuenz and ChaosEngine.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="prose">
+            {rendered.length === 0 ? (
+                <div class="callout">No entries yet.</div>
+            ) : (
+                rendered.map((entry) => (
+                    <article style="margin-bottom: 48px;">
+                        <h3>
+                            {entry.data.pubDate.toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                timeZone: 'UTC',
+                            })}
+                        </h3>
+                        <entry.Content />
+                    </article>
+                ))
+            )}
+            <div class="callout">This changelog will track ChaosEngine product updates once the platform reaches general availability.</div>
+        </div>
+    </section>
+</Layout>

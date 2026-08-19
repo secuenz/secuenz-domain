@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="Contact | Secuenz"
+  description="Get in touch with the Secuenz team about ChaosEngine early access, partnerships, or security reports."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: "Contact" }]} />
+        <h1>Talk to Secuenz</h1>
+        <p>Choose the route that matches your question. Early-access applicants can use the guided application; every route still has a direct email fallback.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="grid-3">
+            <div class="feature-card">
+                <h3>Early Access</h3>
+                <p style="margin-bottom: 20px;">Want to try ChaosEngine or bring an existing assessment workflow to a pilot?</p>
+                <a href={CTA.earlyAccess} class="btn btn-primary" style="width: 100%; text-align: center;">Apply for early access</a>
+            </div>
+            <div class="feature-card">
+                <h3>Security Reports</h3>
+                <p style="margin-bottom: 20px;">Found a vulnerability in ChaosEngine or this site? See our <a href="/security/" class="text-primary">disclosure policy</a> first.</p>
+                <a href={CTA.securityReport} class="btn btn-outline" style="width: 100%; text-align: center;">{EMAIL.security}</a>
+            </div>
+            <div class="feature-card">
+                <h3>Everything Else</h3>
+                <p style="margin-bottom: 20px;">Partnerships, press, general questions — send it here.</p>
+                <a href={CTA.hello} class="btn btn-outline" style="width: 100%; text-align: center;">{EMAIL.hello}</a>
+            </div>
+        </div>
+    </section>
+</Layout>

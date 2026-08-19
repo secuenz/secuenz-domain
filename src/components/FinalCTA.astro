@@ -1,0 +1,29 @@
+---
+import { CTA } from '../data/site';
+
+interface Props {
+  title?: string;
+  body?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  title = 'Bring one real assessment workflow.',
+  body = 'We are onboarding a focused group of security teams and helping each one translate an existing process into a governed ChaosEngine workflow.',
+  secondaryHref = '/docs/',
+  secondaryLabel = 'Read the docs',
+} = Astro.props;
+---
+
+<section class="final-cta">
+    <div>
+        <span class="section-kicker">ChaosEngine early access</span>
+        <h2>{title}</h2>
+        <p>{body}</p>
+    </div>
+    <div class="hero-btns final-cta-actions">
+        <a href={CTA.earlyAccess} class="btn btn-primary">Request Early Access</a>
+        <a href={secondaryHref} class="btn btn-outline">{secondaryLabel}</a>
+    </div>
+</section>

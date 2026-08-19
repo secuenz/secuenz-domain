@@ -1,0 +1,114 @@
+---
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="ChaosEngine Early Access | Secuenz"
+  description="Apply for a focused ChaosEngine pilot and bring one repeatable security assessment workflow to the team."
+>
+    <section class="page-hero early-access-hero">
+        <Breadcrumb trail={[{ label: 'Early Access' }]} />
+        <span class="section-kicker">Focused design-partner program</span>
+        <h1>Bring one workflow. Leave with a governed blueprint.</h1>
+        <p>Early access is for security teams that already run a repeatable assessment and want to make its scope, approvals, execution and outputs easier to reproduce.</p>
+    </section>
+
+    <section class="pilot-grid">
+        <div>
+            <span class="section-kicker">What the pilot includes</span>
+            <h2>A concrete first workflow—not a generic product tour.</h2>
+            <ul class="check-list">
+                <li>Direct workflow-scoping session with the product team</li>
+                <li>Mapping of inputs, nodes, workflow approval and expected artifacts</li>
+                <li>Guided onboarding to the current early-access product</li>
+                <li>Review of required worker tools and execution constraints</li>
+                <li>A feedback channel while the product and documentation evolve</li>
+            </ul>
+        </div>
+        <aside class="pilot-fit">
+            <span class="section-kicker">A good fit</span>
+            <p>Your team can name a workflow it runs today, owns authorization for the target environment, and can provide practical feedback.</p>
+            <span class="section-kicker not-fit">Not a fit yet</span>
+            <p>You need an unattended scanner, a managed pentest service, or confirmed enterprise/compliance commitments before evaluation.</p>
+            <div class="pilot-terms">
+                <strong>Commercial terms</strong>
+                <span>Public pricing is not yet published. Pilot scope and terms are confirmed directly before onboarding.</span>
+            </div>
+        </aside>
+    </section>
+
+    <section class="application-section" id="apply">
+        <div class="application-copy">
+            <span class="section-kicker">Apply for early access</span>
+            <h2>Tell us what you want to make repeatable.</h2>
+            <p>This form does not send data to a website backend. Submitting opens your email client with the answers prefilled so you can review them before sending.</p>
+            <p>Prefer plain email? Write to <a href={CTA.earlyAccessEmail}>{EMAIL.hello}</a>.</p>
+        </div>
+        <form class="application-form" id="early-access-form">
+            <div class="form-grid">
+                <label>
+                    <span>Name</span>
+                    <input name="name" autocomplete="name" required />
+                </label>
+                <label>
+                    <span>Work email</span>
+                    <input type="email" name="email" autocomplete="email" required />
+                </label>
+                <label>
+                    <span>Company</span>
+                    <input name="company" autocomplete="organization" required />
+                </label>
+                <label>
+                    <span>Role</span>
+                    <input name="role" autocomplete="organization-title" required />
+                </label>
+            </div>
+            <label>
+                <span>Team type</span>
+                <select name="team" required>
+                    <option value="">Select one</option>
+                    <option>Pentest consultancy</option>
+                    <option>AppSec or product security</option>
+                    <option>Internal red team</option>
+                    <option>Other security team</option>
+                </select>
+            </label>
+            <label>
+                <span>Workflow to bring into the pilot</span>
+                <textarea name="workflow" rows="5" required placeholder="What starts the workflow, which tools or scripts run, where a human decision is needed, and what output the team expects?"></textarea>
+            </label>
+            <label>
+                <span>Current execution environment or constraints</span>
+                <textarea name="environment" rows="3" placeholder="Optional: worker environment, data-handling needs, preferred deployment model, or timing."></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary">Prepare application email</button>
+            <p class="form-note">By sending the resulting email, you agree that Secuenz may use the information to respond to your inquiry as described in the <a href="/privacy/">Privacy Policy</a>.</p>
+        </form>
+    </section>
+</Layout>
+
+<script is:inline define:vars={{ email: EMAIL.hello }}>
+    const form = document.getElementById('early-access-form');
+    form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const lines = [
+            `Name: ${data.get('name') || ''}`,
+            `Work email: ${data.get('email') || ''}`,
+            `Company: ${data.get('company') || ''}`,
+            `Role: ${data.get('role') || ''}`,
+            `Team type: ${data.get('team') || ''}`,
+            '',
+            'Workflow to bring into the pilot:',
+            String(data.get('workflow') || ''),
+            '',
+            'Environment or constraints:',
+            String(data.get('environment') || 'Not provided'),
+        ];
+        const subject = encodeURIComponent(`ChaosEngine early access — ${data.get('company') || 'application'}`);
+        const body = encodeURIComponent(lines.join('\n'));
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+</script>

@@ -1,0 +1,54 @@
+---
+import FinalCTA from '../components/FinalCTA.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Layout from '../layouts/Layout.astro';
+import { CTA, EMAIL } from '../data/site';
+---
+
+<Layout
+  title="About Secuenz | Company Behind ChaosEngine"
+  description="Secuenz is the company building ChaosEngine, a security assessment orchestration platform for AppSec, red-team and pentest teams."
+>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'About' }]} />
+        <span class="section-kicker">The company behind ChaosEngine</span>
+        <h1>Security assessment infrastructure should be reviewable.</h1>
+        <p>Secuenz is focused on one product: ChaosEngine. We are building the orchestration layer that makes repeatable security work easier to compose, approve, execute and inspect.</p>
+    </section>
+
+    <section class="problem-grid about-grid">
+        <div>
+            <span class="section-kicker">Why Secuenz exists</span>
+            <h2>Security teams should not have to choose between speed and control.</h2>
+        </div>
+        <div class="prose compact-prose">
+            <p>Most assessment teams already own capable tools. The recurring problem is operational: scripts drift, approvals separate from execution, outputs scatter across terminals and the next person has to reconstruct how the work was done.</p>
+            <p>Secuenz is building ChaosEngine to make that process visible without pretending automation removes the need for authorization or expert judgment.</p>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="section-heading">
+            <span class="section-kicker">How we build</span>
+            <h2>Principles we are willing to publish early.</h2>
+        </div>
+        <div class="grid-3">
+            <div class="feature-card"><h3>Evidence before claims</h3><p>Catalog entries, validation and polished demos are not substitutes for verified runtime behavior.</p></div>
+            <div class="feature-card"><h3>Humans retain authority</h3><p>Consequential assessment stages and final interpretations need explicit human ownership.</p></div>
+            <div class="feature-card"><h3>Boundaries are product features</h3><p>Authorization, organization isolation, permissions and safe execution are part of the product—not prompt text.</p></div>
+        </div>
+    </section>
+
+    <section class="company-stage">
+        <div>
+            <span class="section-kicker">Company stage</span>
+            <h2>Early access, with the product and public record evolving together.</h2>
+        </div>
+        <div>
+            <p>ChaosEngine is approaching general availability through focused design-partner pilots. We publish current limitations instead of making unsupported customer, certification or maturity claims.</p>
+            <p>For company, partnership or press questions, contact <a href={CTA.hello}>{EMAIL.hello}</a>.</p>
+        </div>
+    </section>
+
+    <FinalCTA />
+</Layout>

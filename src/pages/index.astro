@@ -1,0 +1,170 @@
+---
+import FinalCTA from '../components/FinalCTA.astro';
+import ProductPreview from '../components/ProductPreview.astro';
+import Layout from '../layouts/Layout.astro';
+import { productFeatures } from '../data/productFeatures';
+import { CTA } from '../data/site';
+import { useCases } from '../data/useCases';
+import { workflowBlueprints } from '../data/workflows';
+
+const description =
+  'Build, approve and run repeatable pentest and AppSec workflows using security tools, custom scripts and AI agents, then retain the results in one execution record.';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': new URL('/#organization', Astro.site).href,
+    name: 'Secuenz',
+    legalName: 'Secuenz Inc.',
+    url: Astro.site!.href,
+    logo: new URL('/brand-mark-512.png', Astro.site).href,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Secuenz',
+    url: Astro.site!.href,
+    publisher: { '@id': new URL('/#organization', Astro.site).href },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'ChaosEngine',
+    alternateName: 'Secuenz ChaosEngine',
+    applicationCategory: 'SecurityApplication',
+    applicationSubCategory: 'Security assessment orchestration',
+    operatingSystem: 'Web',
+    url: new URL('/chaosengine/', Astro.site).href,
+    description,
+    featureList: productFeatures.map((feature) => feature.title),
+    publisher: { '@id': new URL('/#organization', Astro.site).href },
+  },
+];
+---
+
+<Layout
+  title="Secuenz ChaosEngine | Security Assessment Orchestration"
+  description={description}
+  structuredData={structuredData}
+>
+    <section class="hero">
+        <span class="section-kicker">ChaosEngine by Secuenz</span>
+        <h1>Make security assessments repeatable.<br><span>Govern every consequential step.</span></h1>
+        <p>Compose security actions, scripts and AI agents into visible workflows, require human approval before execution, run through workers and retain the execution record.</p>
+        <div class="hero-btns">
+            <a href={CTA.earlyAccess} class="btn btn-primary">Request Early Access</a>
+            <a href="/chaosengine/" class="btn btn-outline">See how it works</a>
+        </div>
+        <ul class="proof-strip" aria-label="ChaosEngine product characteristics">
+            <li>Visual DAG workflows</li>
+            <li>Workflow approval lifecycle</li>
+            <li>Worker-backed execution</li>
+            <li>Structured result artifacts</li>
+        </ul>
+    </section>
+
+    <ProductPreview />
+
+    <section class="features product-features" id="features">
+        <div class="section-heading split-heading">
+            <div>
+                <span class="section-kicker">Implemented product capabilities</span>
+                <h2>Built for the full assessment lifecycle.</h2>
+            </div>
+            <a href="/chaosengine/#capabilities" class="text-link">Explore every capability →</a>
+        </div>
+        <div class="grid-3 feature-grid">
+            {productFeatures.slice(0, 6).map((feature, index) => (
+                <article class="feature-card capability-card">
+                    <div class="feature-card-meta"><span>0{index + 1}</span><span>{feature.eyebrow}</span></div>
+                    <h3>{feature.title}</h3>
+                    <p>{feature.body}</p>
+                    <div class="capability-detail">{feature.detail}</div>
+                </article>
+            ))}
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="section-heading centered-heading">
+            <span class="section-kicker">Build → approve → run</span>
+            <h2>Turn an assessment process into a governed execution path.</h2>
+            <p>ChaosEngine keeps the target, workflow definition, reviewer decision and node outputs connected.</p>
+        </div>
+        <ol class="process-grid">
+            <li><span>01</span><h3>Compose the work</h3><p>Connect input, tool, script, agent and output nodes on a visible DAG.</p></li>
+            <li><span>02</span><h3>Review the scope</h3><p>Require the right reviewer before the workflow is approved for execution.</p></li>
+            <li><span>03</span><h3>Execute and retain</h3><p>Run through configured workers and keep each node's artifacts with the execution record.</p></li>
+        </ol>
+    </section>
+
+    <section class="content-section audience-section">
+        <div class="section-heading split-heading">
+            <div>
+                <span class="section-kicker">Who it is for</span>
+                <h2>Built for teams that repeat security assessment work.</h2>
+            </div>
+            <a href="/use-cases/" class="text-link">Explore every use case →</a>
+        </div>
+        <div class="grid-3">
+            {useCases.map((item) => (
+                <a class="feature-card linked-card" href={`/use-cases/${item.slug}/`}>
+                    <span class="badge">{item.eyebrow}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.summary}</p>
+                    <span class="card-link">Explore use case →</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <section class="workflow-showcase">
+        <div class="section-heading split-heading">
+            <div>
+                <span class="section-kicker">Reference workflows</span>
+                <h2>Start with a blueprint your team can challenge.</h2>
+            </div>
+            <a href="/workflows/" class="text-link">Open the workflow library →</a>
+        </div>
+        <div class="grid-3">
+            {workflowBlueprints.map((workflow, index) => (
+                <a class="feature-card linked-card workflow-card" href={`/workflows/${workflow.slug}/`}>
+                    <span class="workflow-number">0{index + 1}</span>
+                    <h3>{workflow.title}</h3>
+                    <p>{workflow.summary}</p>
+                    <span class="card-link">Inspect blueprint →</span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="trust-text">Built by the team who secured</div>
+        <div class="logos" aria-label="Organizations previously secured by the team">
+            <div class="logo-item" title="Apple" aria-label="Apple">
+                <svg viewBox="0 0 384 512" role="img" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-11.4 69.5-34.3z"/></svg>
+            </div>
+            <div class="logo-item" title="Google" aria-label="Google">
+                <svg viewBox="0 0 488 512" role="img" aria-hidden="true"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+            </div>
+            <div class="logo-item" title="Netflix" aria-label="Netflix">
+                <svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M6 4h4.5l11 17V4H26v24h-4.5L10.5 11v17H6V4z"/></svg>
+            </div>
+            <div class="logo-item" title="Pinterest" aria-label="Pinterest">
+                <svg viewBox="0 0 496 512" role="img" aria-hidden="true"><path d="M239.1 34.3c-84.4 0-153.3 68.9-153.3 153.3 0 66.4 39.1 122.9 95.7 144.3-1.4-12.3-2.6-31.3.6-44.7 2.8-12.2 18.3-77.8 18.3-77.8s-4.5-9.1-4.5-22.5c0-21.1 12.2-36.9 27.5-36.9 12.9 0 19.2 9.7 19.2 21.4 0 13-8.3 32.5-12.6 50.6-3.6 15.1 7.6 27.4 22.5 27.4 27 0 47.8-28.5 47.8-69.5 0-36.3-26.1-61.6-63.4-61.6-43.1 0-68.5 32.3-68.5 65.7 0 13 5 26.9 11.3 34.5 1.2 1.5 1.4 2.8 1 5.1-1.1 4.6-3.6 14.6-4.1 16.6-.6 2.6-2.1 3.1-4.8 1.9-18-8.3-29.2-34.4-29.2-55.4 0-45.1 32.7-86.6 94.3-86.6 49.5 0 88 35.3 88 82.4 0 49.2-31 88.8-74.1 88.8-14.4 0-28-7.5-32.7-16.3l-8.8 33.6c-3.2 12.3-11.9 27.7-17.7 37.1 13.2 4.1 27.3 6.3 42 6.3 84.4 0 153.3-68.9 153.3-153.3S323.5 34.3 239.1 34.3z"/></svg>
+            </div>
+        </div>
+    </section>
+
+    <section class="security-band">
+        <div>
+            <span class="section-kicker">Governed by design</span>
+            <h2>Offensive-security tooling needs explicit boundaries.</h2>
+        </div>
+        <p>ChaosEngine is designed around authorized targets, role-based access, organization boundaries and recorded approvals. Our public security and acceptable-use policies state what is verified today and what remains in progress.</p>
+        <a href="/security/" class="btn btn-outline">Review security posture</a>
+    </section>
+
+    <FinalCTA />
+</Layout>

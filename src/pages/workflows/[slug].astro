@@ -1,0 +1,67 @@
+---
+import FinalCTA from '../../components/FinalCTA.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Layout from '../../layouts/Layout.astro';
+import { workflowBlueprints } from '../../data/workflows';
+
+export function getStaticPaths() {
+  return workflowBlueprints.map((workflow) => ({ params: { slug: workflow.slug }, props: { workflow } }));
+}
+
+const { workflow } = Astro.props;
+---
+
+<Layout title={`${workflow.title} Workflow | Secuenz ChaosEngine`} description={workflow.summary} socialImage={false}>
+    <section class="page-hero">
+        <Breadcrumb trail={[{ label: 'Workflows', href: '/workflows/' }, { label: workflow.title }]} />
+        <span class="section-kicker">Reference workflow / {workflow.audience}</span>
+        <h1>{workflow.title}</h1>
+        <p>{workflow.summary}</p>
+        <div class="hero-btns left-actions">
+            <a href="/early-access/#apply" class="btn btn-primary">Pilot this workflow</a>
+            <a href="/docs/" class="btn btn-outline">Understand the model</a>
+        </div>
+    </section>
+
+    <section class="workflow-detail-grid">
+        <div>
+            <span class="section-kicker">Workflow contract</span>
+            <dl class="detail-list">
+                <div><dt>Audience</dt><dd>{workflow.audience}</dd></div>
+                <div><dt>Authorized scope</dt><dd>{workflow.scope}</dd></div>
+                <div><dt>Expected outcome</dt><dd>{workflow.outcome}</dd></div>
+                <div><dt>Approval policy</dt><dd>{workflow.approval}</dd></div>
+            </dl>
+        </div>
+        <div>
+            <span class="section-kicker">Expected artifacts</span>
+            <ul class="check-list">
+                {workflow.outputs.map((output) => <li>{output}</li>)}
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-heading">
+            <span class="section-kicker">Node sequence</span>
+            <h2>How the workflow is composed</h2>
+        </div>
+        <ol class="node-sequence">
+            {workflow.steps.map((step, index) => (
+                <li>
+                    <span class="node-index">{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                        <span class="badge">{step.type}</span>
+                        <h3>{step.title}</h3>
+                        <p>{step.detail}</p>
+                    </div>
+                </li>
+            ))}
+        </ol>
+        <div class="callout wide-callout">
+            This blueprint describes the intended orchestration pattern. A pilot confirms the exact registered tools, worker dependencies, input schema and output contract before execution.
+        </div>
+    </section>
+
+    <FinalCTA title={`Bring your current ${workflow.title.toLowerCase()} process.`} />
+</Layout>
